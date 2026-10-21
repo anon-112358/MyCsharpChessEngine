@@ -4,6 +4,8 @@ namespace MyCsharpChessEngine.src.Graphics;
 
 static class Common
 {
+    public static readonly int targetFPS = 30;
+
     public static readonly Color BlackTileColor = new(181, 136, 99);
     public static readonly Color WhiteTileColor = new(240, 217, 181);
     public static readonly Color backgroundColor = new(22, 21, 18);

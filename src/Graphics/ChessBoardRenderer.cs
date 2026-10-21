@@ -1,39 +1,26 @@
 namespace MyCsharpChessEngine.src.Graphics;
 
-using MyCsharpChessEngine.src.Core;
+using System.Diagnostics;
 using Raylib_cs;
 
-public sealed class ChessBoardRenderer
+public class ChessBoardRenderer
 {
-    private static ChessBoardRenderer? _instance;
     private readonly Task logicThread;
     private int paddingX = Common.PaddingX;
     private int paddingY = Common.PaddingY;
 
-    private ChessBoardRenderer(Task logicThreadInput)
+    private static readonly TaskFactory scheduler = new(
+        new ConcurrentExclusiveSchedulerPair().ExclusiveScheduler
+    );
+
+    public ChessBoardRenderer(Task logicThreadInput)
     {
         logicThread = logicThreadInput;
         Raylib.SetConfigFlags(ConfigFlags.ResizableWindow);
         Raylib.SetConfigFlags(ConfigFlags.Msaa4xHint);
-        InitScreen();
     }
 
-    public static ChessBoardRenderer Initialize(Task logicThread)
-    {
-        if (_instance != null)
-            throw new InvalidOperationException("ChessBoardRenderer class already initialized.");
-
-        _instance = new ChessBoardRenderer(logicThread);
-        return _instance;
-    }
-
-    public static ChessBoardRenderer Instance =>
-        _instance
-        ?? throw new InvalidOperationException(
-            "ChessBoardRenderer.Initialize(logicThread) must be called before accessing Instance."
-        );
-
-    private void InitScreen()
+    public async Task InitScreen()
     {
         Raylib.SetTraceLogLevel(TraceLogLevel.Warning);
         Raylib.InitWindow(
@@ -41,10 +28,21 @@ public sealed class ChessBoardRenderer
             height: Common.boardSize + Common.PaddingY,
             title: "Chess"
         );
-        Raylib.SetTargetFPS(60);
+
+        SingleThreadAsyncContext.SingleThreadRunner.Run(Render);
+
+        Raylib.CloseWindow();
+    }
+
+    private async Task Render()
+    {
+        Stopwatch watch = new();
+        watch.Start();
 
         while (!Raylib.WindowShouldClose() && !logicThread.IsFaulted && !logicThread.IsCanceled)
         {
+            watch.Restart();
+
             int newWidth = (Raylib.GetScreenWidth() - Common.boardSize) / 2;
             int newHeight = (Raylib.GetScreenHeight() - Common.boardSize) / 2;
             paddingX = newWidth > 0 ? newWidth : 0;
@@ -56,9 +54,12 @@ public sealed class ChessBoardRenderer
             DrawTiles();
 
             Raylib.EndDrawing();
-        }
 
-        Raylib.CloseWindow();
+            var freeTime = (1000 / Common.targetFPS) - (int)(watch.ElapsedMilliseconds);
+            //Console.WriteLine($"frame time: {freeTime}ms");
+            if (freeTime > 0)
+                await Task.Delay(freeTime);
+        }
     }
 
     private void DrawTiles()
