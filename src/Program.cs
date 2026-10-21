@@ -1,19 +1,23 @@
-﻿using MyCsharpChessEngine.src.Graphics;
+﻿using MyCsharpChessEngine.src.Core;
 
-static async Task testFunc()
-{
-    Console.WriteLine("presup");
-    await Task.Delay(5000);
-    throw new Exception("sup");
-}
+// using MyCsharpChessEngine.src.Graphics;
 
-var logicTask = Task.Run(() => testFunc());
+// static async Task testFunc()
+// {
+//     Console.WriteLine("presup");
+//     await Task.Delay(5000);
+//     throw new Exception("sup");
+// }
 
-var board = ChessBoard.Instance;
+await new ArgParser(args).parsedArgs.InvokeAsync();
 
-board.InitScreen(logicTask);
+// var logicTask = Task.Run(() => testFunc());
 
-if (logicTask.IsFaulted)
-{
-    await logicTask;
-}
+// var board = ChessBoard.Instance;
+
+// board.InitScreen(logicTask);
+
+// if (logicTask.IsFaulted)
+// {
+//     await logicTask;
+// }
