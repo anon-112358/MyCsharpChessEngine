@@ -4,7 +4,7 @@ using Raylib_cs;
 
 public sealed class ChessBoard
 {
-    private ChessBoard() { }
+    private ChessBoard() { } //needs state later for pieces n stuff
 
     public static ChessBoard Instance
     {
@@ -18,12 +18,13 @@ public sealed class ChessBoard
         internal static readonly ChessBoard instance = new();
     }
 
-    public void InitScreen()
+    public void InitScreen(Task logicThread) // maybe will use state
     {
+        Raylib.SetTraceLogLevel(TraceLogLevel.Warning);
         Raylib.InitWindow(Common.windowSize, Common.windowSize, "Chess");
         Raylib.SetTargetFPS(60);
 
-        while (!Raylib.WindowShouldClose())
+        while (!Raylib.WindowShouldClose() || logicThread.IsFaulted || logicThread.IsCanceled)
         {
             Raylib.BeginDrawing();
             Raylib.ClearBackground(Common.backgroundColor);
@@ -36,13 +37,12 @@ public sealed class ChessBoard
         Raylib.CloseWindow();
     }
 
-    private void DrawTiles()
+    private static void DrawTiles()
     {
         for (int y = 0; y < 8; y++)
         {
             for (int x = 0; x < 8; x++)
             {
-                Console.WriteLine($"y {y} x {x}");
                 Raylib.DrawRectangle(
                     x * Common.TileSize,
                     y * Common.TileSize,
