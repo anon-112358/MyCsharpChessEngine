@@ -31,13 +31,19 @@ namespace MyCsharpChessEngine.src.Chess
         public ulong BlackQueens = 0;
         public ulong BlackKing = 0;
 
-        public ulong AllWhite =>
-            WhitePawns | WhiteKnights | WhiteBishops | WhiteRooks | WhiteQueens | WhiteKing;
-
-        public ulong AllBlack =>
-            BlackPawns | BlackKnights | BlackBishops | BlackRooks | BlackQueens | BlackKing;
-        public ulong Occupied => AllWhite | AllBlack;
-
-        public ulong AllPieces => AllWhite | AllBlack;
+        public ulong AllWhite
+        {
+            get =>
+                (WhitePawns | WhiteKnights | WhiteBishops | WhiteRooks | WhiteQueens | WhiteKing);
+        }
+        public ulong AllBlack
+        {
+            get =>
+                (BlackPawns | BlackKnights | BlackBishops | BlackRooks | BlackQueens | BlackKing);
+        }
+        public ulong AllPieces
+        {
+            get => (AllWhite | AllBlack);
+        }
     }
 }
