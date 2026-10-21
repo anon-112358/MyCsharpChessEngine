@@ -6,7 +6,9 @@
     "configurations": [
         {
             "name": ".NET Core Debugger (launch)",
-            "args": [],
+            "args": [
+                "play"
+            ],
             "type": "coreclr",
             "request": "launch",
             "program": "${command:dotrush.activeTargetPath}",
