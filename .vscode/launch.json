@@ -12,11 +12,5 @@
             "program": "${command:dotrush.activeTargetPath}",
             "preLaunchTask": "dotrush: Build"
         },
-        {
-            "name": ".NET Core Debugger (attach)",
-            "type": "coreclr",
-            "request": "attach",
-            "processId": "${command:dotrush.pickProcess}"
-        }
     ]
 }
