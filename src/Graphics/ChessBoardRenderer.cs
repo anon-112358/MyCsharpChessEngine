@@ -3,31 +3,31 @@ namespace MyCsharpChessEngine.src.Graphics;
 using MyCsharpChessEngine.src.Core;
 using Raylib_cs;
 
-public sealed class ChessBoard
+public sealed class ChessBoardRenderer
 {
-    private static ChessBoard? _instance;
+    private static ChessBoardRenderer? _instance;
     private readonly Task logicThread;
 
-    private ChessBoard(Task logicThreadInput)
+    private ChessBoardRenderer(Task logicThreadInput)
     {
         logicThread = logicThreadInput;
         if (Settings.IsHeadless)
             InitScreen();
     }
 
-    public static ChessBoard Initialize(Task logicThread)
+    public static ChessBoardRenderer Initialize(Task logicThread)
     {
         if (_instance != null)
-            throw new InvalidOperationException("ChessBoard class already initialized.");
+            throw new InvalidOperationException("ChessBoardRenderer class already initialized.");
 
-        _instance = new ChessBoard(logicThread);
+        _instance = new ChessBoardRenderer(logicThread);
         return _instance;
     }
 
-    public static ChessBoard Instance =>
+    public static ChessBoardRenderer Instance =>
         _instance
         ?? throw new InvalidOperationException(
-            "ChessBoard.Initialize(logicThread) must be called before accessing Instance."
+            "ChessBoardRenderer.Initialize(logicThread) must be called before accessing Instance."
         );
 
     private void InitScreen() // maybe will use state
