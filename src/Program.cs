@@ -1,6 +1,6 @@
 ﻿using MyCsharpChessEngine.src.Graphics;
 
-async Task testFunc()
+static async Task testFunc()
 {
     Console.WriteLine("presup");
     await Task.Delay(5000);
@@ -11,7 +11,6 @@ var logicTask = Task.Run(() => testFunc());
 
 var board = ChessBoard.Instance;
 
-// todo fix this freezing
 board.InitScreen(logicTask);
 
 if (logicTask.IsFaulted)

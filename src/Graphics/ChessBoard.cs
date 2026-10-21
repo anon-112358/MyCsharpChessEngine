@@ -24,7 +24,7 @@ public sealed class ChessBoard
         Raylib.InitWindow(Common.windowSize, Common.windowSize, "Chess");
         Raylib.SetTargetFPS(60);
 
-        while (!Raylib.WindowShouldClose() || logicThread.IsFaulted || logicThread.IsCanceled)
+        while (!Raylib.WindowShouldClose() && !logicThread.IsFaulted && !logicThread.IsCanceled)
         {
             Raylib.BeginDrawing();
             Raylib.ClearBackground(Common.backgroundColor);
