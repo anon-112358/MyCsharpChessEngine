@@ -15,6 +15,9 @@ namespace MyCsharpChessEngine.src.Core
             }
             var logicTask = Task.Run(() => testFunc(), token);
 
+            var renderer = new ChessBoardRenderer(logicTask);
+            await renderer.InitScreen();
+
             if (logicTask.IsFaulted)
             {
                 await logicTask;
