@@ -4,21 +4,31 @@ using Raylib_cs;
 
 public sealed class ChessBoard
 {
-    private ChessBoard() { } //needs state later for pieces n stuff
+    private static ChessBoard? _instance;
+    private readonly Task logicThread;
 
-    public static ChessBoard Instance
+    private ChessBoard(Task logicThreadInput)
     {
-        get { return Nested.instance; }
+        logicThread = logicThreadInput;
+        InitScreen();
     }
 
-    private class Nested
+    public static ChessBoard Initialize(Task logicThread)
     {
-        static Nested() { }
+        if (_instance != null)
+            throw new InvalidOperationException("ChessBoard already initialized.");
 
-        internal static readonly ChessBoard instance = new();
+        _instance = new ChessBoard(logicThread);
+        return _instance;
     }
 
-    public void InitScreen(Task logicThread) // maybe will use state
+    public static ChessBoard Instance =>
+        _instance
+        ?? throw new InvalidOperationException(
+            "ChessBoard.Initialize(logicThread) must be called before accessing Instance."
+        );
+
+    private void InitScreen() // maybe will use state
     {
         Raylib.SetTraceLogLevel(TraceLogLevel.Warning);
         Raylib.InitWindow(Common.windowSize, Common.windowSize, "Chess");
