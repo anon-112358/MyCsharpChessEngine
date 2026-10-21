@@ -1,5 +1,6 @@
 namespace MyCsharpChessEngine.src.Graphics;
 
+using MyCsharpChessEngine.src.Core;
 using Raylib_cs;
 
 public sealed class ChessBoard
@@ -10,13 +11,14 @@ public sealed class ChessBoard
     private ChessBoard(Task logicThreadInput)
     {
         logicThread = logicThreadInput;
-        InitScreen();
+        if (Settings.IsHeadless)
+            InitScreen();
     }
 
     public static ChessBoard Initialize(Task logicThread)
     {
         if (_instance != null)
-            throw new InvalidOperationException("ChessBoard already initialized.");
+            throw new InvalidOperationException("ChessBoard class already initialized.");
 
         _instance = new ChessBoard(logicThread);
         return _instance;
