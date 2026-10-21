@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net11.0</TargetFramework>
@@ -8,8 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources/b-bishop.png" />
+    <EmbeddedResource Include="Resources/b-king.png" />
+    <EmbeddedResource Include="Resources/b-knight.png" />
+    <EmbeddedResource Include="Resources/b-pawn.png" />
+    <EmbeddedResource Include="Resources/b-queen.png" />
+    <EmbeddedResource Include="Resources/b-rook.png" />
+    <EmbeddedResource Include="Resources/w-bishop.png" />
+    <EmbeddedResource Include="Resources/w-king.png" />
+    <EmbeddedResource Include="Resources/w-knight.png" />
+    <EmbeddedResource Include="Resources/w-pawn.png" />
+    <EmbeddedResource Include="Resources/w-queen.png" />
+    <EmbeddedResource Include="Resources/w-rook.png" />
+
     <PackageReference Include="Raylib-cs" Version="8.1.0" />
     <PackageReference Include="System.CommandLine" Version="2.0.13" />
   </ItemGroup>
-
 </Project>
