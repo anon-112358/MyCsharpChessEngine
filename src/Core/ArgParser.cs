@@ -7,6 +7,7 @@ namespace MyCsharpChessEngine.src.Core
         private readonly Option<bool> headlessOption = new("--headless")
         {
             Description = "Runs the program without displaying a window.",
+            Recursive = true,
             // should allow for cli input if playing
         };
         private readonly Command playingCommand = new("play")
@@ -18,13 +19,13 @@ namespace MyCsharpChessEngine.src.Core
             Description = "Benchmarks the engine against a compatible executable.",
         };
 
-        public readonly RootCommand RootCMD;
+        public readonly RootCommand RootCommand;
         public readonly ParseResult parsedArgs;
 
         public ArgParser(string[] args)
         {
-            RootCMD = [headlessOption, playingCommand, benchCommand];
-            parsedArgs = RootCMD.Parse(args);
+            RootCommand = [headlessOption, playingCommand, benchCommand];
+            parsedArgs = RootCommand.Parse(args);
             SetupActions();
             SetSettings();
         }
@@ -36,7 +37,7 @@ namespace MyCsharpChessEngine.src.Core
 
         private void SetupActions()
         {
-            RootCMD.SetAction(DefaultAction);
+            RootCommand.SetAction(DefaultAction);
             playingCommand.SetAction(PlayAction.Run);
             benchCommand.SetAction(BenchmarkAction.Run);
         }
