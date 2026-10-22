@@ -11,7 +11,7 @@ public class ChessBoardRenderer
     private int paddingX = Common.PaddingX;
     private int paddingY = Common.PaddingY;
 
-    private Dictionary<string, Texture2D> pieces = [];
+    private readonly Dictionary<string, Texture2D> pieces = [];
 
     private static readonly Dictionary<string, Func<BitBoard, ulong>> pieceMasks = new()
     {
@@ -30,10 +30,6 @@ public class ChessBoardRenderer
     };
 
     public BitBoard board;
-
-    private static readonly TaskFactory scheduler = new(
-        new ConcurrentExclusiveSchedulerPair().ExclusiveScheduler
-    );
 
     private Texture2D? GetPieceAtSquare(int pos)
     {
