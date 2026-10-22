@@ -21,14 +21,34 @@ namespace MyCsharpChessEngine.src.Chess
         // !fixme! todo: add an efficient "chech if square [x] is 1 on this ulong" func<int, bool>
         // !fixme! todo: reduce code repetition
 
+        private void UpdateWhiteMasks()
+        {
+            WhitePieces = (
+                WhitePawns | WhiteKnights | WhiteBishops | WhiteRooks | WhiteQueens | WhiteKing
+            );
+            UpdateGlobalMasks();
+        }
+
+        private void UpdateBlackMasks()
+        {
+            BlackPieces = (
+                BlackPawns | BlackKnights | BlackBishops | BlackRooks | BlackQueens | BlackKing
+            );
+            UpdateGlobalMasks();
+        }
+
+        private void UpdateGlobalMasks()
+        {
+            AllPieces = (WhitePieces | BlackPieces);
+        }
+
         public ulong WhitePawns
         {
             get;
             set
             {
                 field = value;
-                AllPieces |= value;
-                WhitePieces |= value;
+                UpdateWhiteMasks();
             }
         } = 0;
         public ulong WhiteRooks
@@ -37,8 +57,7 @@ namespace MyCsharpChessEngine.src.Chess
             set
             {
                 field = value;
-                AllPieces |= value;
-                WhitePieces |= value;
+                UpdateWhiteMasks();
             }
         } = 0;
         public ulong WhiteBishops
@@ -47,8 +66,7 @@ namespace MyCsharpChessEngine.src.Chess
             set
             {
                 field = value;
-                AllPieces |= value;
-                WhitePieces |= value;
+                UpdateWhiteMasks();
             }
         } = 0;
         public ulong WhiteKnights
@@ -57,8 +75,7 @@ namespace MyCsharpChessEngine.src.Chess
             set
             {
                 field = value;
-                AllPieces |= value;
-                WhitePieces |= value;
+                UpdateWhiteMasks();
             }
         } = 0;
         public ulong WhiteQueens
@@ -67,8 +84,7 @@ namespace MyCsharpChessEngine.src.Chess
             set
             {
                 field = value;
-                AllPieces |= value;
-                WhitePieces |= value;
+                UpdateWhiteMasks();
             }
         } = 0;
         public ulong WhiteKing
@@ -77,8 +93,7 @@ namespace MyCsharpChessEngine.src.Chess
             set
             {
                 field = value;
-                AllPieces |= value;
-                WhitePieces |= value;
+                UpdateWhiteMasks();
             }
         } = 0;
         public ulong BlackPawns
@@ -87,8 +102,7 @@ namespace MyCsharpChessEngine.src.Chess
             set
             {
                 field = value;
-                AllPieces |= value;
-                BlackPieces |= value;
+                UpdateBlackMasks();
             }
         } = 0;
         public ulong BlackRooks
@@ -97,8 +111,7 @@ namespace MyCsharpChessEngine.src.Chess
             set
             {
                 field = value;
-                AllPieces |= value;
-                BlackPieces |= value;
+                UpdateBlackMasks();
             }
         } = 0;
         public ulong BlackBishops
@@ -107,8 +120,7 @@ namespace MyCsharpChessEngine.src.Chess
             set
             {
                 field = value;
-                AllPieces |= value;
-                BlackPieces |= value;
+                UpdateBlackMasks();
             }
         } = 0;
         public ulong BlackKnights
@@ -117,8 +129,7 @@ namespace MyCsharpChessEngine.src.Chess
             set
             {
                 field = value;
-                AllPieces |= value;
-                BlackPieces |= value;
+                UpdateBlackMasks();
             }
         } = 0;
         public ulong BlackQueens
@@ -127,8 +138,7 @@ namespace MyCsharpChessEngine.src.Chess
             set
             {
                 field = value;
-                AllPieces |= value;
-                BlackPieces |= value;
+                UpdateBlackMasks();
             }
         } = 0;
         public ulong BlackKing
@@ -137,13 +147,12 @@ namespace MyCsharpChessEngine.src.Chess
             set
             {
                 field = value;
-                AllPieces |= value;
-                BlackPieces |= value;
+                UpdateBlackMasks();
             }
         } = 0;
 
-        public ulong WhitePieces { get; set; } = 0;
-        public ulong BlackPieces { get; set; } = 0;
-        public ulong AllPieces { get; set; } = 0;
+        public ulong WhitePieces { get; private set; } = 0;
+        public ulong BlackPieces { get; private set; } = 0;
+        public ulong AllPieces { get; private set; } = 0;
     }
 }
