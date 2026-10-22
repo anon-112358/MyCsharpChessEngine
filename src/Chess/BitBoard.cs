@@ -18,7 +18,7 @@ namespace MyCsharpChessEngine.src.Chess
             BlackKing = 0x10_00_00_00_00_00_00_00,
         };
 
-        // !fixme! todo: add an efficient "chech if square [x] is 1 on this ulong" func<int, bool>
+        // !fixme! todo: add an efficient "chech if square [x] is 1 on this ulong" helper func<int, bool>
         // !fixme! todo: reduce code repetition
 
         private void UpdateWhiteMasks()
