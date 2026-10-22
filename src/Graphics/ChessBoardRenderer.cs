@@ -43,7 +43,6 @@ public class ChessBoardRenderer
         );
         foreach (var kv in masks)
         {
-            var sb = new System.Text.StringBuilder();
             if ((kv.Value & (1UL << pos)) != 0)
             {
                 return pieces[kv.Key];
