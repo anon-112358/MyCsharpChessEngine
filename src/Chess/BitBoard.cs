@@ -18,32 +18,132 @@ namespace MyCsharpChessEngine.src.Chess
             BlackKing = 0x10_00_00_00_00_00_00_00,
         };
 
-        public ulong WhitePawns = 0;
-        public ulong WhiteRooks = 0;
-        public ulong WhiteBishops = 0;
-        public ulong WhiteKnights = 0;
-        public ulong WhiteQueens = 0;
-        public ulong WhiteKing = 0;
-        public ulong BlackPawns = 0;
-        public ulong BlackRooks = 0;
-        public ulong BlackBishops = 0;
-        public ulong BlackKnights = 0;
-        public ulong BlackQueens = 0;
-        public ulong BlackKing = 0;
+        // !fixme! todo: add an efficient "chech if square [x] is 1 on this ulong" func<int, bool>
+        // !fixme! todo: reduce code repetition
 
-        public ulong AllWhite
+        public ulong WhitePawns
         {
-            get =>
-                (WhitePawns | WhiteKnights | WhiteBishops | WhiteRooks | WhiteQueens | WhiteKing);
-        }
-        public ulong AllBlack
+            get;
+            set
+            {
+                field = value;
+                AllPieces |= value;
+                WhitePieces |= value;
+            }
+        } = 0;
+        public ulong WhiteRooks
         {
-            get =>
-                (BlackPawns | BlackKnights | BlackBishops | BlackRooks | BlackQueens | BlackKing);
-        }
-        public ulong AllPieces
+            get;
+            set
+            {
+                field = value;
+                AllPieces |= value;
+                WhitePieces |= value;
+            }
+        } = 0;
+        public ulong WhiteBishops
         {
-            get => (AllWhite | AllBlack);
-        }
+            get;
+            set
+            {
+                field = value;
+                AllPieces |= value;
+                WhitePieces |= value;
+            }
+        } = 0;
+        public ulong WhiteKnights
+        {
+            get;
+            set
+            {
+                field = value;
+                AllPieces |= value;
+                WhitePieces |= value;
+            }
+        } = 0;
+        public ulong WhiteQueens
+        {
+            get;
+            set
+            {
+                field = value;
+                AllPieces |= value;
+                WhitePieces |= value;
+            }
+        } = 0;
+        public ulong WhiteKing
+        {
+            get;
+            set
+            {
+                field = value;
+                AllPieces |= value;
+                WhitePieces |= value;
+            }
+        } = 0;
+        public ulong BlackPawns
+        {
+            get;
+            set
+            {
+                field = value;
+                AllPieces |= value;
+                BlackPieces |= value;
+            }
+        } = 0;
+        public ulong BlackRooks
+        {
+            get;
+            set
+            {
+                field = value;
+                AllPieces |= value;
+                BlackPieces |= value;
+            }
+        } = 0;
+        public ulong BlackBishops
+        {
+            get;
+            set
+            {
+                field = value;
+                AllPieces |= value;
+                BlackPieces |= value;
+            }
+        } = 0;
+        public ulong BlackKnights
+        {
+            get;
+            set
+            {
+                field = value;
+                AllPieces |= value;
+                BlackPieces |= value;
+            }
+        } = 0;
+        public ulong BlackQueens
+        {
+            get;
+            set
+            {
+                field = value;
+                AllPieces |= value;
+                BlackPieces |= value;
+            }
+        } = 0;
+        public ulong BlackKing
+        {
+            get;
+            set
+            {
+                field = value;
+                AllPieces |= value;
+                BlackPieces |= value;
+            }
+        } = 0;
+
+        public ulong WhitePieces { get; set; } = 0;
+        public ulong BlackPieces { get; set; } = 0;
+        public ulong AllPieces { get; set; } = 0;
     }
 }
