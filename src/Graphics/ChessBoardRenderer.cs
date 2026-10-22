@@ -170,7 +170,12 @@ public class ChessBoardRenderer
                     continue;
 
                 var texture = (Texture2D)potentialTexture;
-                Raylib.DrawTexture(texture, x * Common.TileSize, y * Common.TileSize, Color.White);
+                Raylib.DrawTexture(
+                    texture,
+                    x * Common.TileSize + paddingX,
+                    y * Common.TileSize + paddingY,
+                    Color.White
+                );
             }
         }
     }
